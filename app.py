@@ -31,14 +31,7 @@ import io
 import json
 import plotly.graph_objects as go
 import plotly.express as px
-try:
-    import dash_auth
-except Exception:
-    # Fallback when dash_auth is not installed: create a minimal shim so the app can run
-    # without authentication (useful for development); install `dash-auth` for real auth.
-    import types, warnings
-    warnings.warn("dash_auth not installed; running without authentication (development only).", UserWarning)
-    dash_auth = types.SimpleNamespace(BasicAuth=lambda app, pairs: None)
+import dash_auth
 
 # ============================================================================
 # AUTHENTICATION SETUP
@@ -62,6 +55,9 @@ auth = dash_auth.BasicAuth(
     app,
     VALID_USERNAME_PASSWORD_PAIRS
 )
+
+# Expose the server variable for deployment (MUST be after auth)
+server = app.server
 
 # Global variables to store data
 database_df = None
@@ -295,7 +291,7 @@ app.layout = dbc.Container([
         dbc.Col([
             html.H1([
                 icon("diagram-3", size="1.2em", className="text-primary"),
-                "Powder Mixing Optimiser for Additive Manufacturing"
+                "Steel Mixing Optimizer"
             ], className="text-center text-primary mb-3 mt-4"),
             html.P("Find optimal mixing ratios of steel powders to achieve target compositions",
                    className="text-center text-muted mb-2"),
@@ -1634,24 +1630,32 @@ def show_custom_alloy_status(n_clicks):
 # ============================================================================
 
 if __name__ == '__main__':
-    print("\n" + "="*80)
-    print(" " * 8 + "🔬 STEEL MIXING OPTIMIZER v4.3 - AUTHENTICATED 🔬")
-    print("="*80)
-    print("\n✓ Starting server...")
-    print("\n🌐 Open your browser and go to: http://localhost:8050")
-    print("\n🔐 AUTHENTICATION REQUIRED:")
-    print("   Valid credentials:")
-    print("   • admin / steel2025")
-    print("   • user / password123")
-    print("   • engineer / metallurgy")
-    print("\n🆕 NEW FEATURES in v4.3:")
-    print("   • 🔒 Username/Password authentication")
-    print("   • 🌡️  MS Temperature calculation (Andrews formula)")
-    print("   • 📊 Color-coded MS temperature badges")
-    print("   • 📈 MS temp displayed in results and CSV export")
-    print("\n💡 MS Temperature Formula:")
-    print("   Ms (°C) = 550 - 350C - 40Mn - 20Cr - 10Mo - 17Ni - 8W - 35V - 10Cu + 15Co + 30Al")
-    print("\n⚠  Press Ctrl+C to stop the server")
-    print("="*80 + "\n")
+    import os
     
-    app.run(debug=True, host='0.0.0.0', port=8050)
+    # Check if running in production or development
+    is_production = os.environ.get('PRODUCTION', 'false').lower() == 'true'
+    
+    if not is_production:
+        print("\n" + "="*80)
+        print(" " * 8 + "🔬 STEEL MIXING OPTIMIZER v4.3 - AUTHENTICATED 🔬")
+        print("="*80)
+        print("\n✓ Starting server...")
+        print("\n🌐 Open your browser and go to: http://localhost:8050")
+        print("\n🔐 AUTHENTICATION REQUIRED:")
+        print("   Valid credentials:")
+        print("   • admin / steel2025")
+        print("   • user / password123")
+        print("   • engineer / metallurgy")
+        print("\n🆕 NEW FEATURES in v4.3:")
+        print("   • 🔒 Username/Password authentication")
+        print("   • 🌡️  MS Temperature calculation (comprehensive formula)")
+        print("   • 📊 Color-coded MS temperature badges")
+        print("   • 📈 MS temp displayed in results and CSV export")
+        print("\n💡 MS Temperature Formula:")
+        print("   Ms (°C) = 550 - 350C - 40Mn - 20Cr - 10Mo - 17Ni - 8W - 35V - 10Cu + 15Co + 30Al")
+        print("\n⚠  Press Ctrl+C to stop the server")
+        print("="*80 + "\n")
+    
+    # Run with appropriate settings
+    port = int(os.environ.get('PORT', 8050))
+    app.run(debug=not is_production, host='0.0.0.0', port=port)
