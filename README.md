@@ -8,15 +8,15 @@ A professional web-based application for finding optimal mixing ratios of steel 
 
 ## ✨ Features
 
-- 🔐 **Secure Authentication** - Username/password protection
-- 🧪 **Multiple Solutions** - View top N best steel combinations
-- 🌡️ **MS Temperature** - Automatic martensite start temperature calculation
-- 📊 **Interactive Visualizations** - Pie charts, bar charts, deviation analysis
-- 📈 **Complete Analysis** - Shows all elements including non-target ones
-- 💾 **Export Results** - Download results as CSV
-- 🎯 **Target Optimization** - Specify composition targets and tolerances
-- 🗑️ **Database Management** - Add/remove alloys from database
-- 📱 **Responsive Design** - Works on desktop and mobile
+-  **Secure Authentication** - Username/password protection
+-  **Multiple Solutions** - View top N best steel combinations
+-  **MS Temperature** - Automatic martensite start temperature calculation
+-  **Interactive Visualizations** - Pie charts, bar charts, deviation analysis
+-  **Complete Analysis** - Shows all elements including non-target ones
+-  **Export Results** - Download results as CSV
+-  **Target Optimization** - Specify composition targets and tolerances
+-  **Database Management** - Add/remove alloys from database
+-  **Responsive Design** - Works on desktop and mobile
 
 ## 🌡️ MS Temperature Formula
 
@@ -26,47 +26,6 @@ Ms (°C) = 550 - 350C - 40Mn - 20Cr - 10Mo - 17Ni - 8W - 35V - 10Cu + 15Co + 30A
 
 Comprehensive formula accounting for all major alloying elements.
 
-## 🚀 Quick Start (Local)
-
-### Prerequisites
-- Python 3.10 or higher
-- pip package manager
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/YOUR_USERNAME/steel-mixing-optimizer.git
-cd steel-mixing-optimizer
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-3. Run the application:
-```bash
-python steel_mixing_optimizer_v4.3_authenticated.py
-```
-
-4. Open your browser:
-```
-http://localhost:8050
-```
-
-5. Login with default credentials:
-- Username: `admin` / Password: `steel2025`
-- Username: `user` / Password: `password123`
-- Username: `engineer` / Password: `metallurgy`
-
-## 🌐 Deploy to Internet
-
-See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for detailed instructions on:
-- Deploying to Render (free)
-- Setting up a custom domain
-- Alternative hosting platforms
-- Environment configuration
 
 ## 📖 How to Use
 
@@ -92,17 +51,6 @@ Your Excel file should have this structure:
 - Other columns: Element compositions in wt.%
 - Use 0 for absent elements
 
-## 🔐 Changing Login Credentials
-
-Edit the `VALID_USERNAME_PASSWORD_PAIRS` dictionary in the Python file:
-
-```python
-VALID_USERNAME_PASSWORD_PAIRS = {
-    'your_username': 'your_password',
-    'another_user': 'another_pass',
-}
-```
-
 ## 🛠️ Technology Stack
 
 - **Framework**: Dash (Plotly)
@@ -126,52 +74,20 @@ steel-mixing-optimizer/
 └── README.md                                      # This file
 ```
 
-## 🔄 Version History
 
-### v4.3 (Current)
-- Added username/password authentication
-- Comprehensive MS temperature formula
-- Color-coded MS temperature badges
-- Production-ready configuration
 
-### v4.2
-- Multiple solutions display
-- Complete element breakdown
-- Inline row selection for removal
-
-### v4.1
-- Alloy removal functionality
-- Interactive database management
-
-### v4.0
-- Interactive visualizations
-- Pie charts, bar charts, deviation analysis
-
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! Please feel free to submit issues or pull requests.
 
-## 📝 License
+##  License
 
 This project is licensed under the MIT License.
 
 ## 👥 Authors
 
-- Assistant AI
+- Pouya Kazempour Dehkordi
 
-## 🙏 Acknowledgments
-
-- Andrews (1965) and other researchers for MS temperature formulas
-- Dash/Plotly community for excellent documentation
-- Users for feedback and feature requests
-
-## 📧 Support
-
-For issues or questions:
-1. Check the [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
-2. Review application logs
-3. Test locally first
-4. Open an issue on GitHub
 
 ## 🎯 Use Cases
 
