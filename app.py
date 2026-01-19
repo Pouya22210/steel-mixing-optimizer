@@ -1,14 +1,14 @@
 """
-Steel Mixing Optimizer - Dash Web Application (AUTHENTICATED v4.3)
-===================================================================
+Steel Mixing Optimizer - Dash Web Application (v4.4 - No Authentication)
+=========================================================================
 A web-based tool to find optimal mixing ratios of steels to achieve target compositions.
 
-NEW in v4.3:
-- Username/Password authentication
-- MS temperature calculation using comprehensive formula:
-  Ms (°C) = 550 - 350C - 40Mn - 20Cr - 10Mo - 17Ni - 8W - 35V - 10Cu + 15Co + 30Al
+NEW in v4.4:
+- Removed authentication requirement for easier access
 
 Previous features:
+- MS temperature calculation using comprehensive formula:
+  Ms (°C) = 550 - 350C - 40Mn - 20Cr - 10Mo - 17Ni - 8W - 35V - 10Cu + 15Co + 30Al
 - Multiple solutions display
 - Complete element breakdown
 - Interactive visualizations
@@ -31,17 +31,6 @@ import io
 import json
 import plotly.graph_objects as go
 import plotly.express as px
-import dash_auth
-
-# ============================================================================
-# AUTHENTICATION SETUP
-# ============================================================================
-# Define valid username and password pairs
-VALID_USERNAME_PASSWORD_PAIRS = {
-    'admin': 'steel2025',
-    'user': 'password123',
-    'engineer': 'metallurgy'
-}
 
 # Initialize the Dash app with a nice theme
 app = dash.Dash(__name__, external_stylesheets=[
@@ -50,13 +39,7 @@ app = dash.Dash(__name__, external_stylesheets=[
 ])
 app.title = "Steel Mixing Optimizer"
 
-# Add Basic Authentication
-auth = dash_auth.BasicAuth(
-    app,
-    VALID_USERNAME_PASSWORD_PAIRS
-)
-
-# Expose the server variable for deployment (MUST be after auth)
+# Expose the server variable for deployment
 server = app.server
 
 # Global variables to store data
@@ -286,7 +269,7 @@ def find_optimal_mix(all_steels, target_composition, tolerances, max_combination
 # ============================================================================
 
 app.layout = dbc.Container([
-    # Header with auth indicator
+    # Header
     dbc.Row([
         dbc.Col([
             html.H1([
@@ -294,8 +277,7 @@ app.layout = dbc.Container([
                 "Steel Mixing Optimizer"
             ], className="text-center text-primary mb-3 mt-4"),
             html.P("Find optimal mixing ratios of steel powders to achieve target compositions",
-                   className="text-center text-muted mb-2"),
-            dbc.Badge([icon_only("shield-check"), "Authenticated Session"], color="success", className="mb-4"),
+                   className="text-center text-muted mb-4"),
         ])
     ]),
     
@@ -576,16 +558,6 @@ app.layout = dbc.Container([
                 dbc.CardBody([
                     html.H4("How to Use This Application", className="mb-3"),
                     
-                    html.H5([icon("lock-fill"), "Authentication"], className="mt-3"),
-                    html.P("This application requires username and password authentication. Valid credentials:"),
-                    html.Ul([
-                        html.Li([html.Strong("admin"), " / steel2025"]),
-                        html.Li([html.Strong("user"), " / password123"]),
-                        html.Li([html.Strong("engineer"), " / metallurgy"]),
-                    ]),
-                    
-                    html.Hr(),
-                    
                     html.H5([icon("list-ol"), "Quick Start Guide"], className="mt-3"),
                     html.Ol([
                         html.Li([html.Strong("Load Database: "), "Go to 'Database' tab and upload your Excel file or load the sample database"]),
@@ -611,9 +583,9 @@ app.layout = dbc.Container([
                     
                     html.Hr(),
                     
-                    html.H5([icon("star"), "Features in v4.3"], className="mt-3"),
+                    html.H5([icon("star"), "Features in v4.4"], className="mt-3"),
                     html.Ul([
-                        html.Li([html.Strong("Authentication: "), "Username/password protection for secure access"]),
+                        html.Li([html.Strong("No Authentication: "), "Direct access without login"]),
                         html.Li([html.Strong("MS Temperature: "), "Automatic calculation using Andrews formula"]),
                         html.Li([html.Strong("Multiple Solutions: "), "Shows top N best combinations"]),
                         html.Li([html.Strong("Complete Element Display: "), "Shows ALL elements including non-target ones"]),
@@ -655,7 +627,7 @@ app.layout = dbc.Container([
     
     # Footer
     html.Hr(),
-    html.P("Steel Mixing Optimizer v4.3 (Authenticated + MS Temperature) | Built with Dash & Python", 
+    html.P("Steel Mixing Optimizer v4.4 (MS Temperature) | Built with Dash & Python", 
            className="text-center text-muted mt-4 mb-4"),
     
 ], fluid=True, style={'maxWidth': '1400px'})
@@ -1637,17 +1609,12 @@ if __name__ == '__main__':
     
     if not is_production:
         print("\n" + "="*80)
-        print(" " * 8 + "🔬 STEEL MIXING OPTIMIZER v4.3 - AUTHENTICATED 🔬")
+        print(" " * 8 + "🔬 STEEL MIXING OPTIMIZER v4.4 - NO AUTHENTICATION 🔬")
         print("="*80)
         print("\n✓ Starting server...")
         print("\n🌐 Open your browser and go to: http://localhost:8050")
-        print("\n🔐 AUTHENTICATION REQUIRED:")
-        print("   Valid credentials:")
-        print("   • admin / steel2025")
-        print("   • user / password123")
-        print("   • engineer / metallurgy")
-        print("\n🆕 NEW FEATURES in v4.3:")
-        print("   • 🔒 Username/Password authentication")
+        print("\n🆕 FEATURES in v4.4:")
+        print("   • 🔓 No authentication required - direct access")
         print("   • 🌡️  MS Temperature calculation (comprehensive formula)")
         print("   • 📊 Color-coded MS temperature badges")
         print("   • 📈 MS temp displayed in results and CSV export")
