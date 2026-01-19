@@ -583,17 +583,6 @@ app.layout = dbc.Container([
                     
                     html.Hr(),
                     
-                    html.H5([icon("star"), "Features in v4.4"], className="mt-3"),
-                    html.Ul([
-                        html.Li([html.Strong("No Authentication: "), "Direct access without login"]),
-                        html.Li([html.Strong("MS Temperature: "), "Automatic calculation using Andrews formula"]),
-                        html.Li([html.Strong("Multiple Solutions: "), "Shows top N best combinations"]),
-                        html.Li([html.Strong("Complete Element Display: "), "Shows ALL elements including non-target ones"]),
-                        html.Li([html.Strong("Inline Selection: "), "Click rows directly in table for removal"]),
-                    ]),
-                    
-                    html.Hr(),
-                    
                     html.H5([icon("graph-up"), "Visualizations"], className="mt-3"),
                     html.P("Each solution includes:"),
                     html.Ul([
